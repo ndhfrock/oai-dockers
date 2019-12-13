@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Container with Mosiac5g Snaps
 
 This directory includes the build materials for building containers with mosaic5g snaps. These scripts allow you to
