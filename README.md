@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Container with Mosiac5g Snaps
 
 This directory includes the build materials for building containers with mosaic5g snaps. These scripts allow you to
@@ -44,11 +45,11 @@ In the build folder:
 
 - To build oai-cn docker containers from source, with the tag mytest:
   - `./build.sh oai-cn mytest`
-  - With default setting, you'll get an image **mosaic5gecosys/oaicn:mytest**.
+  - With default setting, you'll get an image **ndhfrock/oaicn:mytest**.
 
 - To build oai-ran docker containers from source, with the tag mytest:
   - `./build.sh oai-ran mytest`
-  - With default setting, you'll get an image **mosaic5gecosys/oairan:mytest**
+  - With default setting, you'll get an image **ndhfrock/oairan:mytest**
 
 - To clean up unused containers & iamges:
   - `./build.sh clean_all`
@@ -57,3 +58,7 @@ In the build folder:
 ## Known Issues
 
 - TOSHIBA PORTEGE Z30-C will freeze if running any docker container provided by this branch.
+=======
+# oai-dockers
+To build docker image that container openairinterface
+>>>>>>> ed8e09d88f9e21287d2196caef6787f48e3c902b
