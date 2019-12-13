@@ -58,7 +58,3 @@ In the build folder:
 ## Known Issues
 
 - TOSHIBA PORTEGE Z30-C will freeze if running any docker container provided by this branch.
-=======
-# oai-dockers
-To build docker image that container openairinterface
->>>>>>> ed8e09d88f9e21287d2196caef6787f48e3c902b
