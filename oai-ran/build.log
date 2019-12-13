@@ -1,0 +1,69 @@
+Sending build context to Docker daemon   11.7MB
+Step 1/21 : FROM ubuntu:16.04
+ ---> 56bab49eef2e
+Step 2/21 : ENV container docker
+ ---> Using cache
+ ---> 96e155758614
+Step 3/21 : ENV PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+ ---> Using cache
+ ---> 8900b15de347
+Step 4/21 : ENV LANG C.UTF-8
+ ---> Using cache
+ ---> 24b64d3f0f4e
+Step 5/21 : ENV LC_ALL C.UTF-8
+ ---> Using cache
+ ---> a57ffbb210ba
+Step 6/21 : RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y fuse snapd snap-confine squashfuse sudo && apt-get clean && dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
+ ---> Using cache
+ ---> 20cd0e967207
+Step 7/21 : RUN apt-get install -y apt-utils
+ ---> Using cache
+ ---> befdd714b249
+Step 8/21 : RUN apt-get install -y dnsutils
+ ---> Using cache
+ ---> fd482abc9a68
+Step 9/21 : RUN apt-get install -y net-tools
+ ---> Using cache
+ ---> e73084d2ef60
+Step 10/21 : RUN apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 6fd641161e3d
+Step 11/21 : RUN apt-get install -y vim
+ ---> Using cache
+ ---> d56cd02efde9
+Step 12/21 : RUN sed -i "13s/^/\/root\/init.sh/g" /etc/rc.local
+ ---> Running in 1235ae25d0d3
+Removing intermediate container 1235ae25d0d3
+ ---> ea0089d62e23
+Step 13/21 : RUN chmod +x /etc/rc.local
+ ---> Running in 7cad283e2232
+Removing intermediate container 7cad283e2232
+ ---> a4d9c9f9f9e9
+Step 14/21 : COPY ./init.sh /root/
+ ---> a6cc529c42e5
+Step 15/21 : COPY ./hook /root/
+ ---> d0b1e2f065b9
+Step 16/21 : RUN mkdir /root/config
+ ---> Running in 83d3139e236e
+Removing intermediate container 83d3139e236e
+ ---> b882bdf12ce4
+Step 17/21 : COPY ./conf.yaml /root/config/
+ ---> 8ca34cefd5c7
+Step 18/21 : RUN systemctl enable snapd
+ ---> Running in bb17978f253e
+Removing intermediate container bb17978f253e
+ ---> 21bb8ef7e375
+Step 19/21 : VOLUME ["/sys/fs/cgroup"]
+ ---> Running in e740c2c67eb5
+Removing intermediate container e740c2c67eb5
+ ---> b74a44fe0128
+Step 20/21 : STOPSIGNAL SIGRTMIN+3
+ ---> Running in e4e5124ec57e
+Removing intermediate container e4e5124ec57e
+ ---> 477e3774977e
+Step 21/21 : CMD ["/sbin/init"]
+ ---> Running in f1303ba38408
+Removing intermediate container f1303ba38408
+ ---> 09d01e37bdca
+Successfully built 09d01e37bdca
+Successfully tagged ndhfrock/oairan:base

@@ -1,0 +1,108 @@
+Sending build context to Docker daemon   11.7MB
+Step 1/23 : FROM ubuntu:16.04
+ ---> 56bab49eef2e
+Step 2/23 : ENV container docker
+ ---> Using cache
+ ---> 96e155758614
+Step 3/23 : ENV PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+ ---> Using cache
+ ---> 8900b15de347
+Step 4/23 : ENV LANG C.UTF-8
+ ---> Using cache
+ ---> 24b64d3f0f4e
+Step 5/23 : ENV LC_ALL C.UTF-8
+ ---> Using cache
+ ---> a57ffbb210ba
+Step 6/23 : RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y fuse snapd snap-confine squashfuse sudo && apt-get clean && dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
+ ---> Using cache
+ ---> 20cd0e967207
+Step 7/23 : RUN apt-get install -y apt-utils
+ ---> Using cache
+ ---> befdd714b249
+Step 8/23 : RUN apt-get install -y dnsutils
+ ---> Using cache
+ ---> fd482abc9a68
+Step 9/23 : RUN apt-get install -y net-tools
+ ---> Using cache
+ ---> e73084d2ef60
+Step 10/23 : RUN apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 6fd641161e3d
+Step 11/23 : RUN apt-get install -y vim
+ ---> Using cache
+ ---> d56cd02efde9
+Step 12/23 : RUN apt-get install -y tcpdump
+ ---> Running in 5852d7888975
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libpcap0.8
+The following NEW packages will be installed:
+  libpcap0.8 tcpdump
+0 upgraded, 2 newly installed, 0 to remove and 3 not upgraded.
+Need to get 504 kB of archives.
+After this operation, 1526 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpcap0.8 amd64 1.7.4-2 [117 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 tcpdump amd64 4.9.2-0ubuntu0.16.04.1 [387 kB]
+[91mdebconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+[0m[91mdebconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7, <> line 2.)
+debconf: falling back to frontend: Teletype
+[0m[91mdpkg-preconfigure: unable to re-open stdin: 
+[0mFetched 504 kB in 2s (198 kB/s)
+Selecting previously unselected package libpcap0.8:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 9052 files and directories currently installed.)
+Preparing to unpack .../libpcap0.8_1.7.4-2_amd64.deb ...
+Unpacking libpcap0.8:amd64 (1.7.4-2) ...
+Selecting previously unselected package tcpdump.
+Preparing to unpack .../tcpdump_4.9.2-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking tcpdump (4.9.2-0ubuntu0.16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Setting up libpcap0.8:amd64 (1.7.4-2) ...
+Setting up tcpdump (4.9.2-0ubuntu0.16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Removing intermediate container 5852d7888975
+ ---> 8bfbdda44838
+Step 13/23 : RUN mv /usr/sbin/tcpdump /usr/bin/
+ ---> Running in 04c1fec26655
+Removing intermediate container 04c1fec26655
+ ---> 0644512deec5
+Step 14/23 : RUN sed -i "13s/^/\/root\/init.sh/g" /etc/rc.local
+ ---> Running in 37633ad5a96c
+Removing intermediate container 37633ad5a96c
+ ---> 208a918f998a
+Step 15/23 : RUN chmod +x /etc/rc.local
+ ---> Running in 91b331d013fb
+Removing intermediate container 91b331d013fb
+ ---> a4b0ec06fd5f
+Step 16/23 : COPY ./init.sh /root/
+ ---> 452d61659ab2
+Step 17/23 : COPY ./hook /root/
+ ---> bcb423813072
+Step 18/23 : RUN mkdir /root/config
+ ---> Running in 34b6835ce7e4
+Removing intermediate container 34b6835ce7e4
+ ---> 67bafdb80f29
+Step 19/23 : COPY ./conf.yaml /root/config/
+ ---> 7d395773a68b
+Step 20/23 : RUN systemctl enable snapd
+ ---> Running in 93e7ed9cbb2d
+Removing intermediate container 93e7ed9cbb2d
+ ---> 5a9829b51dcf
+Step 21/23 : VOLUME ["/sys/fs/cgroup"]
+ ---> Running in 4513d44f24c0
+Removing intermediate container 4513d44f24c0
+ ---> 737c23700129
+Step 22/23 : STOPSIGNAL SIGRTMIN+3
+ ---> Running in 7dca46783228
+Removing intermediate container 7dca46783228
+ ---> d1c06aacf316
+Step 23/23 : CMD ["/sbin/init"]
+ ---> Running in 124470f59d75
+Removing intermediate container 124470f59d75
+ ---> f890313ab659
+Successfully built f890313ab659
+Successfully tagged ndhfrock/oaicn:base
