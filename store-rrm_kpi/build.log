@@ -1,0 +1,261 @@
+Sending build context to Docker daemon  11.71MB
+Step 1/31 : FROM ubuntu:16.04
+ ---> 56bab49eef2e
+Step 2/31 : ENV container docker
+ ---> Using cache
+ ---> 44f29ba018ce
+Step 3/31 : ENV PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+ ---> Using cache
+ ---> b79e48eaa64a
+Step 4/31 : ENV LANG C.UTF-8
+ ---> Using cache
+ ---> 9d39bbc27c2a
+Step 5/31 : ENV LC_ALL C.UTF-8
+ ---> Using cache
+ ---> f77188746d7e
+Step 6/31 : RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y fuse snapd snap-confine squashfuse sudo && apt-get clean && dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
+ ---> Using cache
+ ---> cd43e447a608
+Step 7/31 : RUN apt-get install -y apt-utils
+ ---> Using cache
+ ---> e06d375e889c
+Step 8/31 : RUN apt-get install -y dnsutils
+ ---> Using cache
+ ---> e553c29cfc74
+Step 9/31 : RUN apt-get install -y net-tools
+ ---> Using cache
+ ---> 2d246f4e18b4
+Step 10/31 : RUN apt-get install -y iputils-ping
+ ---> Using cache
+ ---> f608669cfa48
+Step 11/31 : RUN apt-get install -y vim
+ ---> Using cache
+ ---> f39412838c78
+Step 12/31 : RUN apt-get install -y git
+ ---> Using cache
+ ---> e65f6640cb1f
+Step 13/31 : RUN sed -i "13s/^/\/root\/init.sh/g" /etc/rc.local
+ ---> Using cache
+ ---> 8d54e7406cf0
+Step 14/31 : RUN chmod +x /etc/rc.local
+ ---> Using cache
+ ---> 7618e0654642
+Step 15/31 : COPY ./init.sh /root/
+ ---> 57935e7b7a57
+Step 16/31 : COPY ./hook /root/
+ ---> 164ac520f733
+Step 17/31 : RUN mkdir /root/config
+ ---> Running in 5f91074c6acc
+Removing intermediate container 5f91074c6acc
+ ---> 8fe90982e7d7
+Step 18/31 : COPY ./conf.yaml /root/config/
+ ---> dd83f3d2a9e8
+Step 19/31 : RUN apt-get install -y python
+ ---> Running in 7167640ab409
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python-minimal
+  python2.7 python2.7-minimal
+Suggested packages:
+  python-doc python-tk python2.7-doc binutils binfmt-support
+The following NEW packages will be installed:
+  libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python
+  python-minimal python2.7 python2.7-minimal
+0 upgraded, 7 newly installed, 0 to remove and 3 not upgraded.
+Need to get 3880 kB of archives.
+After this operation, 16.6 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython2.7-minimal amd64 2.7.12-1ubuntu0~16.04.9 [338 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python2.7-minimal amd64 2.7.12-1ubuntu0~16.04.9 [1262 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-minimal amd64 2.7.12-1~16.04 [28.1 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython2.7-stdlib amd64 2.7.12-1ubuntu0~16.04.9 [1884 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python2.7 amd64 2.7.12-1ubuntu0~16.04.9 [224 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython-stdlib amd64 2.7.12-1~16.04 [7768 B]
+Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python amd64 2.7.12-1~16.04 [137 kB]
+[91mdebconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+[0m[91mdebconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+[0m[91mdpkg-preconfigure: unable to re-open stdin: 
+[0mFetched 3880 kB in 9s (398 kB/s)
+Selecting previously unselected package libpython2.7-minimal:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 12058 files and directories currently installed.)
+Preparing to unpack .../libpython2.7-minimal_2.7.12-1ubuntu0~16.04.9_amd64.deb ...
+Unpacking libpython2.7-minimal:amd64 (2.7.12-1ubuntu0~16.04.9) ...
+Selecting previously unselected package python2.7-minimal.
+Preparing to unpack .../python2.7-minimal_2.7.12-1ubuntu0~16.04.9_amd64.deb ...
+Unpacking python2.7-minimal (2.7.12-1ubuntu0~16.04.9) ...
+Selecting previously unselected package python-minimal.
+Preparing to unpack .../python-minimal_2.7.12-1~16.04_amd64.deb ...
+Unpacking python-minimal (2.7.12-1~16.04) ...
+Selecting previously unselected package libpython2.7-stdlib:amd64.
+Preparing to unpack .../libpython2.7-stdlib_2.7.12-1ubuntu0~16.04.9_amd64.deb ...
+Unpacking libpython2.7-stdlib:amd64 (2.7.12-1ubuntu0~16.04.9) ...
+Selecting previously unselected package python2.7.
+Preparing to unpack .../python2.7_2.7.12-1ubuntu0~16.04.9_amd64.deb ...
+Unpacking python2.7 (2.7.12-1ubuntu0~16.04.9) ...
+Selecting previously unselected package libpython-stdlib:amd64.
+Preparing to unpack .../libpython-stdlib_2.7.12-1~16.04_amd64.deb ...
+Unpacking libpython-stdlib:amd64 (2.7.12-1~16.04) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Setting up libpython2.7-minimal:amd64 (2.7.12-1ubuntu0~16.04.9) ...
+Setting up python2.7-minimal (2.7.12-1ubuntu0~16.04.9) ...
+Linking and byte-compiling packages for runtime python2.7...
+Setting up python-minimal (2.7.12-1~16.04) ...
+Selecting previously unselected package python.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 12805 files and directories currently installed.)
+Preparing to unpack .../python_2.7.12-1~16.04_amd64.deb ...
+Unpacking python (2.7.12-1~16.04) ...
+Setting up libpython2.7-stdlib:amd64 (2.7.12-1ubuntu0~16.04.9) ...
+Setting up python2.7 (2.7.12-1ubuntu0~16.04.9) ...
+Setting up libpython-stdlib:amd64 (2.7.12-1~16.04) ...
+Setting up python (2.7.12-1~16.04) ...
+Removing intermediate container 7167640ab409
+ ---> 128ccdd21516
+Step 20/31 : RUN apt-get install -y curl
+ ---> Running in 3d281715ac23
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  curl
+0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+Need to get 139 kB of archives.
+After this operation, 340 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 curl amd64 7.47.0-1ubuntu2.14 [139 kB]
+[91mdebconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+[0m[91mdebconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+[0m[91mdpkg-preconfigure: unable to re-open stdin: 
+[0mFetched 139 kB in 1s (69.8 kB/s)
+Selecting previously unselected package curl.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 12861 files and directories currently installed.)
+Preparing to unpack .../curl_7.47.0-1ubuntu2.14_amd64.deb ...
+Unpacking curl (7.47.0-1ubuntu2.14) ...
+Setting up curl (7.47.0-1ubuntu2.14) ...
+Removing intermediate container 3d281715ac23
+ ---> f6d74ee175e2
+Step 21/31 : RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+ ---> Running in a78801d87421
+[91m  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+  [0m[91m                           [0m[91m    Dl[0m[91moad  Uplo[0m[91mad   Total   Spent    Lef[0m[91mt  S[0m[91mpee[0m[91md
+[0m[91m  0     0  [0m[91m  0     0    0    [0m[91m 0      0 [0m[91m     0 --:[0m[91m--:-- --:--[0m[91m:-- -[0m[91m-:--:--  [0m[91m   0[0m[91m  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m 24 1734k   24  431k    0     0   279k      0  0:00:06  0:00:01  0:00:05  279k[0m[91m100 1734k  100 1734k    0     0   924k      0  0:00:01  0:00:01 --:--:--  924k
+[0mRemoving intermediate container a78801d87421
+ ---> 4d3a734f43b9
+Step 22/31 : RUN python get-pip.py
+ ---> Running in 55521f7586c4
+[91mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+[0mCollecting pip
+  Downloading https://files.pythonhosted.org/packages/00/b6/9cfa56b4081ad13874b0c6f96af8ce16cfbc1cb06bedf8e9164ce5551ec1/pip-19.3.1-py2.py3-none-any.whl (1.4MB)
+Collecting setuptools
+  Downloading https://files.pythonhosted.org/packages/54/28/c45d8b54c1339f9644b87663945e54a8503cfef59cf0f65b3ff5dd17cf64/setuptools-42.0.2-py2.py3-none-any.whl (583kB)
+Collecting wheel
+  Downloading https://files.pythonhosted.org/packages/00/83/b4a77d044e78ad1a45610eb88f745be2fd2c6d658f9798a15e384b7d57c9/wheel-0.33.6-py2.py3-none-any.whl
+Installing collected packages: pip, setuptools, wheel
+Successfully installed pip-19.3.1 setuptools-42.0.2 wheel-0.33.6
+Removing intermediate container 55521f7586c4
+ ---> 2237979733b0
+Step 23/31 : RUN pip install tornado
+ ---> Running in 6128e43dfc85
+[91mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+[0mCollecting tornado
+  Downloading https://files.pythonhosted.org/packages/e6/78/6e7b5af12c12bdf38ca9bfe863fcaf53dc10430a312d0324e76c1e5ca426/tornado-5.1.1.tar.gz (516kB)
+Collecting futures
+  Downloading https://files.pythonhosted.org/packages/d8/a6/f46ae3f1da0cd4361c344888f59ec2f5785e69c872e175a748ef6071cdb5/futures-3.3.0-py2-none-any.whl
+Collecting singledispatch
+  Downloading https://files.pythonhosted.org/packages/c5/10/369f50bcd4621b263927b0a1519987a04383d4a98fb10438042ad410cf88/singledispatch-3.4.0.3-py2.py3-none-any.whl
+Collecting backports_abc>=0.4
+  Downloading https://files.pythonhosted.org/packages/7d/56/6f3ac1b816d0cd8994e83d0c4e55bc64567532f7dc543378bd87f81cebc7/backports_abc-0.5-py2.py3-none-any.whl
+Collecting six
+  Downloading https://files.pythonhosted.org/packages/65/26/32b8464df2a97e6dd1b656ed26b2c194606c16fe163c695a992b36c11cdf/six-1.13.0-py2.py3-none-any.whl
+Building wheels for collected packages: tornado
+  Building wheel for tornado (setup.py): started
+  Building wheel for tornado (setup.py): finished with status 'done'
+  Created wheel for tornado: filename=tornado-5.1.1-cp27-cp27mu-linux_x86_64.whl size=449882 sha256=0e1325dac10332a008b4428fca918a8098e4bae6e952d38885264e4f5e7413f3
+  Stored in directory: /root/.cache/pip/wheels/6d/e1/ce/f4ee2fa420cc6b940123c64992b81047816d0a9fad6b879325
+Successfully built tornado
+Installing collected packages: futures, six, singledispatch, backports-abc, tornado
+Successfully installed backports-abc-0.5 futures-3.3.0 singledispatch-3.4.0.3 six-1.13.0 tornado-5.1.1
+Removing intermediate container 6128e43dfc85
+ ---> 2afcf940f40b
+Step 24/31 : RUN pip install numpy==1.16.5
+ ---> Running in 61f75fd3e7fd
+[91mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+[0mCollecting numpy==1.16.5
+  Downloading https://files.pythonhosted.org/packages/d7/b1/3367ea1f372957f97a6752ec725b87886e12af1415216feec9067e31df70/numpy-1.16.5-cp27-cp27mu-manylinux1_x86_64.whl (17.0MB)
+Installing collected packages: numpy
+Successfully installed numpy-1.16.5
+Removing intermediate container 61f75fd3e7fd
+ ---> edc35c28b708
+Step 25/31 : RUN pip install requests
+ ---> Running in 268274a17bfc
+[91mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+[0mCollecting requests
+  Downloading https://files.pythonhosted.org/packages/51/bd/23c926cd341ea6b7dd0b2a00aba99ae0f828be89d72b2190f27c11d4b7fb/requests-2.22.0-py2.py3-none-any.whl (57kB)
+Collecting urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1
+  Downloading https://files.pythonhosted.org/packages/b4/40/a9837291310ee1ccc242ceb6ebfd9eb21539649f193a7c8c86ba15b98539/urllib3-1.25.7-py2.py3-none-any.whl (125kB)
+Collecting certifi>=2017.4.17
+  Downloading https://files.pythonhosted.org/packages/b9/63/df50cac98ea0d5b006c55a399c3bf1db9da7b5a24de7890bc9cfd5dd9e99/certifi-2019.11.28-py2.py3-none-any.whl (156kB)
+Collecting chardet<3.1.0,>=3.0.2
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+Collecting idna<2.9,>=2.5
+  Downloading https://files.pythonhosted.org/packages/14/2c/cd551d81dbe15200be1cf41cd03869a46fe7226e7450af7a6545bfc474c9/idna-2.8-py2.py3-none-any.whl (58kB)
+Installing collected packages: urllib3, certifi, chardet, idna, requests
+Successfully installed certifi-2019.11.28 chardet-3.0.4 idna-2.8 requests-2.22.0 urllib3-1.25.7
+Removing intermediate container 268274a17bfc
+ ---> 725ef7412a64
+Step 26/31 : RUN pip install pyyaml
+ ---> Running in e7bc78fb5e6e
+[91mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+[0mCollecting pyyaml
+  Downloading https://files.pythonhosted.org/packages/8d/c9/e5be955a117a1ac548cdd31e37e8fd7b02ce987f9655f5c7563c656d5dcb/PyYAML-5.2.tar.gz (265kB)
+Building wheels for collected packages: pyyaml
+  Building wheel for pyyaml (setup.py): started
+  Building wheel for pyyaml (setup.py): finished with status 'done'
+  Created wheel for pyyaml: filename=PyYAML-5.2-cp27-cp27mu-linux_x86_64.whl size=45011 sha256=9662cda226e1a3123cc4bcf7e4929df3dc0ab9282fd677e55a21d905454b29e8
+  Stored in directory: /root/.cache/pip/wheels/54/b7/c7/2ada654ee54483c9329871665aaf4a6056c3ce36f29cf66e67
+Successfully built pyyaml
+Installing collected packages: pyyaml
+Successfully installed pyyaml-5.2
+Removing intermediate container e7bc78fb5e6e
+ ---> bf25105f2038
+Step 27/31 : RUN pip install enum
+ ---> Running in 4d22d6a3098d
+[91mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+[0mCollecting enum
+  Downloading https://files.pythonhosted.org/packages/02/a0/32e1d5a21b703f600183e205aafc6773577e16429af5ad3c3f9b956b07ca/enum-0.4.7.tar.gz
+Requirement already satisfied: setuptools in /usr/local/lib/python2.7/dist-packages (from enum) (42.0.2)
+Building wheels for collected packages: enum
+  Building wheel for enum (setup.py): started
+  Building wheel for enum (setup.py): finished with status 'done'
+  Created wheel for enum: filename=enum-0.4.7-cp27-none-any.whl size=16506 sha256=1775a67b7deac54d801cb2b359ff7f5bc7e25a023e78d232019dae108107db92
+  Stored in directory: /root/.cache/pip/wheels/be/ba/eb/7c6273cf8a17300ccda1e504dbbd7e563670736e887f389459
+Successfully built enum
+Installing collected packages: enum
+Successfully installed enum-0.4.7
+Removing intermediate container 4d22d6a3098d
+ ---> 081750b1596b
+Step 28/31 : RUN systemctl enable snapd
+ ---> Running in c0452022dd13
+Removing intermediate container c0452022dd13
+ ---> 9c6b43c9aba5
+Step 29/31 : VOLUME ["/sys/fs/cgroup"]
+ ---> Running in 6c6f10476139
+Removing intermediate container 6c6f10476139
+ ---> a0419f2eb7d9
+Step 30/31 : STOPSIGNAL SIGRTMIN+3
+ ---> Running in 59efefecb066
+Removing intermediate container 59efefecb066
+ ---> de0299c16562
+Step 31/31 : CMD ["/sbin/init"]
+ ---> Running in 82a9f1656e67
+Removing intermediate container 82a9f1656e67
+ ---> c7c51cfd5a29
+Successfully built c7c51cfd5a29
+Successfully tagged ndhfrock/store-rrm_kpi:base

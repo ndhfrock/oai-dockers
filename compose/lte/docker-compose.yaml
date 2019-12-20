@@ -19,7 +19,7 @@ services:
       - oai
 
   oairan:
-    image: ndhfrock/oairanslicing:1.0
+    image: ndhfrock/store-drone:1.0
     restart: always
     container_name: oairan
     hostname: oairan

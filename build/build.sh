@@ -68,7 +68,7 @@ build_base(){
     cd ../${DIR}/
     cp ../build/hook ./
     cp ../build/conf.yaml ./
-    docker build -t ${TARGET}:${TAG_BASE} --force-rm=true --rm=true --no-cache .  |& tee build.log
+    docker build -t ${TARGET}:${TAG_BASE} --force-rm=true --rm=true .  |& tee build.log
     clean_up
 }
 
@@ -114,6 +114,7 @@ build_target_nosnap(){
     docker commit ${BASE_CONTAINER} ${TARGET}:${RELEASE_TAG}
     docker stop ${BASE_CONTAINER}
     docker container rm ${BASE_CONTAINER} -f
+    docker image rm ${TARGET}:${TAG_BASE}
     docker image prune -f
     echo "Now ${TARGET}:${RELEASE_TAG} is ready"
 }
@@ -157,6 +158,16 @@ main() {
             TARGET_NAME="llmec"
             build_target ${1}
         ;;
+	store-drone)
+	    DIR="store-drone"
+            TARGET_NAME="store-drone"
+            build_target_nosnap ${1}
+        ;;
+	store-rrm_kpi)
+	    DIR="store-rrm_kpi"
+            TARGET_NAME="store-rrm_kpi"
+            build_target_nosnap ${1}
+        ;;
         build-hook)
             build_hook
             exit 0
@@ -171,7 +182,7 @@ main() {
             echo "Description:"
             echo "This Script will remove the old docker snap image and build a new one"
             echo "tested with 16.04 Ubuntu"
-            echo "./build_snap_docker.sh [oai-cn|oai-ran|oai-ranslicing|flexran|ll-mec] [release tag(default is latest)]"
+            echo "./build_snap_docker.sh [oai-cn|oai-ran|oai-ranslicing|flexran|ll-mec|store-drone|store-rrm_kpi] [release tag(default is latest)]"
             echo "Example: ./build_snap_docker.sh oai-cn mytest"
             exit 0
         ;;
