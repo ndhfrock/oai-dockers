@@ -59,7 +59,7 @@ build_hook(){
 
 # Set variables
 init() {
-
+    echo "Creating ${BASE_CONTAINER}"
     TARGET="${REPO_NAME}/${TARGET_NAME}"
 }
 
@@ -74,6 +74,7 @@ build_base(){
 
 # Build the target image
 build_target(){
+    echo "Creating ${BASE_CONTAINER}"
     init
     build_base
     docker run --name=${BASE_CONTAINER} -ti --privileged -v /proc:/writable-proc -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /lib/modules:/lib/modules:ro -h ubuntu -d ${TARGET}:${TAG_BASE}
@@ -119,6 +120,7 @@ build_target_nosnap(){
     echo "Now ${TARGET}:${RELEASE_TAG} is ready"
 }
 
+
 clean_up(){
     rm hook
     rm conf.yaml
@@ -142,6 +144,11 @@ main() {
             DIR="oai-ran"
             TARGET_NAME="oairan"
             build_target ${1}
+        ;;
+	oai-nbiot)
+            DIR="oai-nbiot"
+            TARGET_NAME="oainbiot"
+            build_target_nosnap ${1}
         ;;
 	oai-ranslicing)
             DIR="oai-ranslicing"
@@ -168,6 +175,11 @@ main() {
             TARGET_NAME="store-rrm_kpi"
             build_target_nosnap ${1}
         ;;
+	ltebox)
+	    DIR="ltebox"
+            TARGET_NAME="ltebox"
+            build_target_nosnap ${1}
+        ;;
         build-hook)
             build_hook
             exit 0
@@ -182,7 +194,7 @@ main() {
             echo "Description:"
             echo "This Script will remove the old docker snap image and build a new one"
             echo "tested with 16.04 Ubuntu"
-            echo "./build_snap_docker.sh [oai-cn|oai-ran|oai-ranslicing|flexran|ll-mec|store-drone|store-rrm_kpi] [release tag(default is latest)]"
+            echo "./build_snap_docker.sh [oai-cn|oai-ran|oai-ranslicing|flexran|ll-mec|store-drone|store-rrm_kpi|ltebox] [release tag(default is latest)]"
             echo "Example: ./build_snap_docker.sh oai-cn mytest"
             exit 0
         ;;

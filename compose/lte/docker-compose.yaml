@@ -1,10 +1,10 @@
 version: '2'
 
 services:
-  oaicn: # Domain name of container
-    image: ndhfrock/oaicn:1.0 # image of the container
+  cn: # Domain name of container
+    image: ndhfrock/ltebox:1.0 # image of the container
     restart: always # Operation Policy
-    container_name: oaicn # Name of the container
+    container_name: cn # Name of the container
     hostname: ubuntu # hostname
     privileged: true # Give the container the permission to manipulate the host
     depends_on: # Before starting this container, what should be ready
@@ -18,14 +18,14 @@ services:
     networks: # the network this container attached to
       - oai
 
-  oairan:
-    image: ndhfrock/store-drone:1.0
+  ran:
+    image: ndhfrock/oairan:1.1
     restart: always
-    container_name: oairan
-    hostname: oairan
+    container_name: ran
+    hostname: ran
     privileged: true
     depends_on:
-      - "oaicn"
+      - "cn"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro

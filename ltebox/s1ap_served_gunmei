@@ -1,0 +1,15 @@
+s1ap_served_gummei {
+plmn = 20894
+group_id = { 0x80, 0x0 }
+code = 1
+}
+s1ap_served_gummei {
+plmn = 20892
+group_id = { 0x80, 0x0 }
+code = 1
+}
+s1ap_served_gummei {
+plmn = 20893
+group_id = { 0x80, 0x0 }
+code = 1
+}
