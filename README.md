@@ -37,8 +37,12 @@ In **compose** directory, we provide docker-compose files that can bring up Mosa
   - oai-ran (SNAP oai-ran)
   - oai-cn (SNAP oai-cn)
   - oai-ranslicing (oai-ran from this repo https://gitlab.com/changshengliusamuel/LTE_Mac_scheduler_with_network_slicing)
-  - flexran
+  - oai-nbiot (ran for nb-iot)
+  - flexran (ran controller)
+  - ltebox from nokia
   - ll-mec (not tested yet)
+  - store-drone (drone app/ran stats GUI from mosaic5g store)
+  - store-rrm_kpi (slicing GUI from mosaic5g store)
 
 In the build folder:
 
