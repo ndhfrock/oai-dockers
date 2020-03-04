@@ -68,7 +68,7 @@ build_base(){
     cd ../${DIR}/
     cp ../build/hook ./
     cp ../build/conf.yaml ./
-    docker build -t ${TARGET}:${TAG_BASE} --force-rm=true --rm=true .  |& tee build.log
+    docker build -t ${TARGET}:${TAG_BASE} --no-cache --force-rm=true --rm=true .  |& tee build.log
     clean_up
 }
 
@@ -194,7 +194,7 @@ main() {
             echo "Description:"
             echo "This Script will remove the old docker snap image and build a new one"
             echo "tested with 16.04 Ubuntu"
-            echo "./build_snap_docker.sh [oai-cn|oai-ran|oai-ranslicing|flexran|ll-mec|store-drone|store-rrm_kpi|ltebox] [release tag(default is latest)]"
+            echo "./build_snap_docker.sh [oai-cn|oai-ran|oai-ranslicing|oai-nbiot|flexran|ll-mec|store-drone|store-rrm_kpi|ltebox] [release tag(default is latest)]"
             echo "Example: ./build_snap_docker.sh oai-cn mytest"
             exit 0
         ;;
